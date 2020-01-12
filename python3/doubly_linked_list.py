@@ -1,12 +1,4 @@
-from functools import wraps
-
-def wrapper(method):
-    @wraps(method)
-    def _impl(self, *method_args, **method_kwargs):
-        method_output = method(self, *method_args, **method_kwargs)
-        print(self)
-        return method_output
-    return _impl
+from print_after_done import print_after_done
 
 class Node():
     def __init__(self, data):
@@ -18,7 +10,7 @@ class LinkedList():
     head = None
     tail = None
 
-    @wrapper
+    @print_after_done
     def add_element(self, data):
         new_node = Node(data)
         if not self.head:
@@ -33,7 +25,7 @@ class LinkedList():
         new_node.prev = current_node
         self.tail = new_node
 
-    @wrapper
+    @print_after_done
     def remove_element(self, data):
         current_node = self.head
 
